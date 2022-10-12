@@ -1,18 +1,41 @@
+let player1Mark = "x"
+let player1MarkImg = "../img/imgx.png"
+let player2Mark = "o"
+let player2MarkImg = "../img/imgo.png"
+let playerMark = player1Mark
+let board = document.getElementById('gameBoard')
+let player1 = {nombre: 'jugadorA', tipo:'humano'}
+let player2 = {nombre: 'jugadorB', tipo:'humano'}
+let player = {}
 
+const startGame = () => {
+        for (let i = 0; i < 9; i++){
+        let box = document.createElement("div")
+        box.id = i
+        box.className = 'board-box'
 
-// function place(box) {
-//     alert ("Hey buddy, you clicked here!");
-// }
+        box.onclick = () => {
+            if (box.innerHTML == "") {
+                if (playerMark == player1Mark) {
+                    console.log(`url("${player1MarkImg}")`)
+                    box.style.backgroundImage = `url('${player1MarkImg}')`;
+                    player = player1;
+                    // player1Turns--;
+                    // player1TurnsCounter();
+                    // checkWinner();
+                    playerMark = player2Mark;
+                } else {
+                    box.style.backgroundImage = `url("${player2MarkImg}")`;
+                    player = player2;
+                    // player2Turns--;
+                    // player2TurnsCounter();
+                    // checkWinner();
+                    playerMark = player1Mark;
+                }
+            }
+        }
 
-/*Setting that the inner text of every <div></div> will be that one stored under the "currentPlayer" variable */
+        board.appendChild(box)
 
-let currentPlayer = "O";
-function place(box) {
-    if (box.innerText != "") return;
-    box.innerText = currentPlayer;
-    currentPlayer == "O" ? currentPlayer = "X" : currentPlayer = "O";
+    }
 }
-    /*Here it is placed an if statement to the above function that will check if a player should place a nought or a cross.*/
-    
-
-/* Basically, through the above lines we are telling the program that if the condition of the currentPlayer variable is equal to O, then set the currentPlayer variable to X. Otherwise, if the condition is false, set it to O. */ 
