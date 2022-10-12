@@ -5,9 +5,9 @@
 } */
 
 /* Rows attributes */
-.row div {
+/* .row div { */
     /* padding: 10em; */
-    border: 1px solid black;
+    /* border: 1px solid black;
     height: 30vh;
     width: 30vw;
     float: left;
@@ -15,5 +15,21 @@
 
 .row {
     clear: both;
+} */
+
+
+.board-box {
+    width: 33.3333%;
+    height: 33.3333%;
+    border: 1px solid;
+    background-size: cover;
+    background-position: center;
+}
+
+#gameBoard {
+    width: 500px;
+    height: 500px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
