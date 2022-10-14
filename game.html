@@ -12,29 +12,44 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-4 col-sm-12 p-0 m-0">
-            <div class="data-form">
-                <span class="form-control">Jugador X</span>
-                <input type="text" id="plyx" placeholder="Jugador 1"/>
-                <input type="radio" name="tipoplyx" value="hum"/> Humano
-                <input type="radio" name="tipoplyx" value="CPU"/> CPU
+    <div id="titulo" class="container d-flex align-items-center justify-content-center mt-3 w-100 "><h1 class="display-2">Tres en raya</h1></div>
+<div id="cabecera" class="container d-flex align-items-center justify-content-center mt-1">
+  
+		<div id="opcion1" class="row mt-5">
+			<button type="button" onclick="jugadores(1)" class="btn btn-warning m-2">1 jugador</button>
+			<button type="button" onclick="jugadores(2)" class="btn btn-warning m-2">2 jugadores</button>
+		</div>
+		<div id="opcion2" class="row mt-5" hidden="true">
+			<button type="button" onclick="jugando(1)"class="btn btn-warning m-2">Quiero X (empiezo yo)</button>
+			<button type="button" onclick="jugando(2)"class="btn btn-warning m-2">Quiero O (empieza el ordenador)</button>
+		</div>
+ </div>
+  <div class="container d-flex align-items-center justify-content-center mt-5">
 
-                <span class="form-control">Jugador O</span>
-                <input type="text" id="plyo" placeholder="Jugador 2"/>
-                <input type="radio" name="tipoplyo" value="hum"/> Humano
-                <input type="radio" name="tipoplyo" value="hum"/> CPU
-                <button onclick="startGame()" class="startButton">Play!</button>
-
-
-            </div>
-        </div>
-        <div class="col-lg-8 col-sm-12 p-0 m-0">
-            <div id="gameBoard"></div>
-        </div>
-        </div>
-    </div>
-    <script src="./js/main.js"></script>
+	<div id="tablero" hidden="true">
+		<table>
+			<tr>
+				<td id="celda0" onclick="fcelda(0)"></td>
+				<td id="celda1" onclick="fcelda(1)"></td>
+				<td id="celda2" onclick="fcelda(2)"></td>
+			</tr>
+			<tr>
+				<td id="celda3" onclick="fcelda(3)"></td>
+				<td id="celda4" onclick="fcelda(4)"></td>
+				<td id="celda5" onclick="fcelda(5)"></td>
+			</tr>
+			<tr>
+				<td id="celda6" onclick="fcelda(6)"></td>
+				<td id="celda7" onclick="fcelda(7)"></td>
+				<td id="celda8" onclick="fcelda(8)"></td>
+			</tr>
+		</table>
+	</div>
+</div>
+<div class="container d-flex flex-column-reverse align-items-center justify-content-center mb-5 mt-2">
+	<div id="final"></div>
+  <div id="mensaje" hidden="true">Haz tu primer movimiento</div>
+</div>
+<script src="./js/main.js"></script>
 </body>
 </html>
