@@ -1,8 +1,8 @@
-var mapa= [0,0,0,0,0,0,0,0,0];
-var jugador=1;
-var njugadores=0;
-var eleccion=0;
-var esquinas=[0,2,6,8];
+let structure= [0,0,0,0,0,0,0,0,0];
+let jugador=1;
+let njugadores=0;
+let eleccion=0;
+let esquinas=[0,2,6,8];
 function resetear(){
 	document.getElementById("opcion1").removeAttribute("hidden", "hidden");
 	document.getElementById("opcion2").setAttribute("hidden", "hidden");
@@ -12,7 +12,7 @@ function resetear(){
 	jugador=1;
 	njugadores=0;
 	eleccion=0;
-	mapa= [0,0,0,0,0,0,0,0,0];
+	structure= [0,0,0,0,0,0,0,0,0];
 	dibujar();
 	document.getElementById("tablero").setAttribute("hidden", "hidden");
 }
@@ -31,29 +31,29 @@ function jugando(turno) {
 	jugar();
 }
 function final(){
-	var espacios=0;
-	for (var i = 0; i < mapa.length; i++) {
-		if (mapa[i]==0) espacios++;		 
+	let espacios=0;
+	for (let i = 0; i < structure.length; i++) {
+		if (structure[i]==0) espacios++;		 
 	}
-	for (var a = 0; a < 8; a+=3) {
-		if (mapa[a]==mapa[a+1]&& mapa[a+1]==mapa[a+2] && mapa[a]>0)return mapa[a];
+	for (let a = 0; a < 8; a+=3) {
+		if (structure[a]==structure[a+1]&& structure[a+1]==structure[a+2] && structure[a]>0)return structure[a];
 	}
-	for (var b = 0; b < 3; b++) {
-		if (mapa[b]==mapa[b+3]&& mapa[b+3]==mapa[b+6] && mapa[b]>0)return mapa[b];
+	for (let b = 0; b < 3; b++) {
+		if (structure[b]==structure[b+3]&& structure[b+3]==structure[b+6] && structure[b]>0)return structure[b];
 	}	
-	if (mapa[0]==mapa[4]&& mapa[4]==mapa[8] && mapa[0]>0)return mapa[0];
-	if (mapa[2]==mapa[4]&& mapa[4]==mapa[6] && mapa[2]>0)return mapa[2];
+	if (structure[0]==structure[4]&& structure[4]==structure[8] && structure[0]>0)return structure[0];
+	if (structure[2]==structure[4]&& structure[4]==structure[6] && structure[2]>0)return structure[2];
 	if (espacios==9) return 9;
 	if (espacios==0) return 0;
 }
 
 function dibujar() {
  
-	for (var i = 0; i < 9; i++) {
-		if(mapa[i]==0){
+	for (let i = 0; i < 9; i++) {
+		if(structure[i]==0){
 			document.getElementById("celda"+i).textContent="";
       
-		}else if (mapa[i]==1) {
+		}else if (structure[i]==1) {
 			document.getElementById("celda"+i).textContent="X";
       document.getElementById("celda"+i).style.color = "yellow";
 		} else {document.getElementById("celda"+i).textContent="O";
@@ -69,19 +69,19 @@ function fcelda(celda){
     else document.getElementById("mensaje").textContent="Turno del jugador 1";
   }
   
-	if (mapa[celda]!=0) {
+	if (structure[celda]!=0) {
     document.getElementById("mensaje").textContent="Esa celda ya está ocupada";
     
   }
 	else if(jugador==1) {
-		mapa[celda]=1;
+		structure[celda]=1;
 		jugador=2;
 	}
 	else {
-		mapa[celda]=2;
+		structure[celda]=2;
 		jugador=1;
 	}
-	//console.log (mapa);
+	//console.log (structure);
 	dibujar();  
 	switch (final()){
 		case 0:
@@ -119,18 +119,18 @@ if (eleccion==2){// casos en los que empieza el ordenador
 			
 			if (!jugadaganadora(1)){
 				if(!jugadaganadora(2)){
-					if (esigual(mapa,[0,2,0,0,0,0,0,0,1])||esigual(mapa,[0,0,0,2,0,0,0,0,1])||esigual(mapa,[0,0,0,0,0,2,0,0,1]))fcelda(6);
-					else if (esigual(mapa,[0,0,0,0,0,0,0,2,1])) fcelda(2);
-					else if (esigual(mapa,[2,0,0,0,0,0,0,0,1])||esigual(mapa,[0,0,2,0,0,0,0,0,1]))fcelda(6);
-					else if (esigual(mapa,[0,0,0,0,0,0,2,0,1])) fcelda(2);
-					else if (mapa[4]==0){
-						if (mapa[8]==1 && (mapa[6]==1||mapa[2]==1)) fcelda(4);
+					if (esigual(structure,[0,2,0,0,0,0,0,0,1])||esigual(structure,[0,0,0,2,0,0,0,0,1])||esigual(structure,[0,0,0,0,0,2,0,0,1]))fcelda(6);
+					else if (esigual(structure,[0,0,0,0,0,0,0,2,1])) fcelda(2);
+					else if (esigual(structure,[2,0,0,0,0,0,0,0,1])||esigual(structure,[0,0,2,0,0,0,0,0,1]))fcelda(6);
+					else if (esigual(structure,[0,0,0,0,0,0,2,0,1])) fcelda(2);
+					else if (structure[4]==0){
+						if (structure[8]==1 && (structure[6]==1||structure[2]==1)) fcelda(4);
 					}
-					else if (esigual(mapa,[0,0,0,0,2,0,0,0,1]))fcelda(0);
-					else if (esigual(mapa,[1,0,2,0,2,0,0,0,1]))fcelda(6);
-					else if (esigual(mapa,[1,0,0,0,2,0,2,0,1]))fcelda(2);
+					else if (esigual(structure,[0,0,0,0,2,0,0,0,1]))fcelda(0);
+					else if (esigual(structure,[1,0,2,0,2,0,0,0,1]))fcelda(6);
+					else if (esigual(structure,[1,0,0,0,2,0,2,0,1]))fcelda(2);
 					else{
-						fcelda(mapa.indexOf(0));
+						fcelda(structure.indexOf(0));
 					}
 				}
 			}
@@ -139,13 +139,13 @@ if (eleccion==2){// casos en los que empieza el ordenador
 }else if (jugador==2){
 	if (!jugadaganadora(2)){
 				if(!jugadaganadora(1)){
-					if (mapa[4]==0)fcelda(4);
-					else if (esigual(mapa,[0,0,0,0,1,0,0,0,0]))fcelda(8);
-					else if((mapa[0]==1||mapa[2]==1||mapa[6]==1||mapa[8]==1) && mapa[1]==0)fcelda(1);
-					else if((mapa[0]==1||mapa[2]==1||mapa[6]==1||mapa[8]==1) && mapa[3]==0)fcelda(3);
-					else if (esigual(mapa,[0,1,0,0,2,0,0,1,0])||esigual(mapa,[0,0,0,1,2,1,0,0,0]))fcelda(2);
+					if (structure[4]==0)fcelda(4);
+					else if (esigual(structure,[0,0,0,0,1,0,0,0,0]))fcelda(8);
+					else if((structure[0]==1||structure[2]==1||structure[6]==1||structure[8]==1) && structure[1]==0)fcelda(1);
+					else if((structure[0]==1||structure[2]==1||structure[6]==1||structure[8]==1) && structure[3]==0)fcelda(3);
+					else if (esigual(structure,[0,1,0,0,2,0,0,1,0])||esigual(structure,[0,0,0,1,2,1,0,0,0]))fcelda(2);
 					else{
-					fcelda(mapa.indexOf(0));
+					fcelda(structure.indexOf(0));
 					}
 				}
 				
@@ -155,29 +155,29 @@ if (eleccion==2){// casos en los que empieza el ordenador
 
 }
 function jugadaganadora(num){
-	var finalizado=false;
-	var trio=[0,0,0];
+	let finalizado=false;
+	let trio=[0,0,0];
 
-	for (var a = 0; a < 8; a+=3) {
-		trio[0]=mapa[a];
-		trio[1]=mapa[a+1];
-		trio[2]=mapa[a+2];
-		var primera=trio.indexOf(num);
-		var ultima=trio.lastIndexOf(num);
-		var cero=trio.indexOf(0);
+	for (let a = 0; a < 8; a+=3) {
+		trio[0]=structure[a];
+		trio[1]=structure[a+1];
+		trio[2]=structure[a+2];
+		let primera=trio.indexOf(num);
+		let ultima=trio.lastIndexOf(num);
+		let cero=trio.indexOf(0);
 		if (primera!=ultima&& cero!= -1){
 
 		 fcelda(a+cero);
 		 return true;
 		}
 	}		
-	for (var b = 0; b < 3; b++) {
-		trio[0]=mapa[b];
-		trio[1]=mapa[b+3];
-		trio[2]=mapa[b+6];
-		var primeraa=trio.indexOf(num);
-		var ultimaa=trio.lastIndexOf(num);
-		var ceroa=trio.indexOf(0);
+	for (let b = 0; b < 3; b++) {
+		trio[0]=structure[b];
+		trio[1]=structure[b+3];
+		trio[2]=structure[b+6];
+		let primeraa=trio.indexOf(num);
+		let ultimaa=trio.lastIndexOf(num);
+		let ceroa=trio.indexOf(0);
 		if (primeraa!=ultimaa&& ceroa!= -1){
 
 		 fcelda(b+ceroa*3);
@@ -185,17 +185,17 @@ function jugadaganadora(num){
 		}
 		
 	}
-	trio[0]=mapa[0];
-	trio[1]=mapa[4];
-	trio[2]=mapa[8];
-	var cerof= trio.indexOf(0);
+	trio[0]=structure[0];
+	trio[1]=structure[4];
+	trio[2]=structure[8];
+	let cerof= trio.indexOf(0);
 	if (trio.indexOf(num)!=trio.lastIndexOf(num)&& cerof!=-1){
 		 fcelda(cerof*4);
 		 return true;
 		}
-	trio[0]=mapa[2];
-	trio[1]=mapa[4];
-	trio[2]=mapa[6];
+	trio[0]=structure[2];
+	trio[1]=structure[4];
+	trio[2]=structure[6];
 	cerof= trio.indexOf(0);
 	if (trio.indexOf(num)!=trio.lastIndexOf(num)&& cerof!=-1){
 
@@ -208,7 +208,7 @@ function jugadaganadora(num){
 
 function esigual(a1, a2){
 	igual=true;
-	for (var i = 0; i < a1.length; i++) {
+	for (let i = 0; i < a1.length; i++) {
 		if(a1[i]!=a2[i]) igual=false;
 	}
 	return igual;
