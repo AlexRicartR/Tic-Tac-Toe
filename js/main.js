@@ -1,6 +1,6 @@
 let structure= [0,0,0,0,0,0,0,0,0];
-let jugador=1;
-let njugadores=0;
+let ticplayer=1;
+let ticplayernumber=0;
 let eleccion=0;
 let esquinas=[0,2,6,8];
 function resetear(){
@@ -9,15 +9,15 @@ function resetear(){
 	document.getElementById("pregunta").setAttribute("hidden", "hidden");
   document.getElementById("mensaje").setAttribute("hidden", "hidden");
   document.getElementById("mensaje").textContent="Haz tu primer movimiento";
-	jugador=1;
-	njugadores=0;
+	ticplayer=1;
+	ticplayernumber=0;
 	eleccion=0;
 	structure= [0,0,0,0,0,0,0,0,0];
 	dibujar();
 	document.getElementById("tablero").setAttribute("hidden", "hidden");
 }
 function jugadores (num) {
-	njugadores = num;
+	ticplayernumber = num;
 	if (num==1){
 		document.getElementById("opcion2").removeAttribute("hidden", "hidden");		
 	}else jugando(1);
@@ -61,25 +61,25 @@ function dibujar() {
 	}
 }
 function fcelda(celda){
-  if (njugadores==1){
-			if (eleccion==jugador)document.getElementById("mensaje").textContent="Juego yo";
+  if (ticplayernumber==1){
+			if (eleccion==ticplayer)document.getElementById("mensaje").textContent="Juego yo";
 			else document.getElementById("mensaje").textContent="Juegas tú";
 	}else{
-    if (jugador == 1) document.getElementById("mensaje").textContent="Turno del jugador 2";
-    else document.getElementById("mensaje").textContent="Turno del jugador 1";
+    if (ticplayer == 1) document.getElementById("mensaje").textContent="Turno del ticplayer 2";
+    else document.getElementById("mensaje").textContent="Turno del ticplayer 1";
   }
   
 	if (structure[celda]!=0) {
     document.getElementById("mensaje").textContent="Esa celda ya está ocupada";
     
   }
-	else if(jugador==1) {
+	else if(ticplayer==1) {
 		structure[celda]=1;
-		jugador=2;
+		ticplayer=2;
 	}
 	else {
 		structure[celda]=2;
-		jugador=1;
+		ticplayer=1;
 	}
 	//console.log (structure);
 	dibujar();  
@@ -89,30 +89,30 @@ function fcelda(celda){
 		pregunta();
 		break;
 		case 1:
-		console.log(njugadores, eleccion);
-		if (njugadores==1){
+		console.log(ticplayernumber, eleccion);
+		if (ticplayernumber==1){
 			if (eleccion==1) document.getElementById("mensaje").textContent="Has ganado!!!";
 			else document.getElementById("mensaje").textContent="Ordenador gana";
-		}else document.getElementById("mensaje").textContent="Gana Jugador 1";
+		}else document.getElementById("mensaje").textContent="Gana ticplayer 1";
 		pregunta();
 		break;
 		case 2:
-		//console.log(njugadores, eleccion);
-		if (njugadores==1){
+		//console.log(ticplayernumber, eleccion);
+		if (ticplayernumber==1){
 			if (eleccion==2) document.getElementById("mensaje").textContent="Has ganado!!!";
 			else document.getElementById("mensaje").textContent="Ordenador gana";;
-		}else document.getElementById("mensaje").textContent="Gana Jugador 2";
+		}else document.getElementById("mensaje").textContent="Gana ticplayer 2";
 		pregunta();
 		break;
 		default:
-		if (njugadores==1&&jugador!=eleccion){jugar();}
+		if (ticplayernumber==1&&ticplayer!=eleccion){jugar();}
 	}
 	
 }
 function jugar(){
 
 if (eleccion==2){// casos en los que empieza el ordenador
-	if (jugador!=eleccion){
+	if (ticplayer!=eleccion){
 		if (final()==9){
 			fcelda(8);
 		}else{
@@ -136,7 +136,7 @@ if (eleccion==2){// casos en los que empieza el ordenador
 			}
 		}
 	}
-}else if (jugador==2){
+}else if (ticplayer==2){
 	if (!jugadaganadora(2)){
 				if(!jugadaganadora(1)){
 					if (structure[4]==0)fcelda(4);
