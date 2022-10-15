@@ -1,9 +1,9 @@
 body {
-    background-color: #a2bedb;
+    background-color: #ffffff;
 }
 
 #titulo {
-    color: red;
+    color: rgb(0, 110, 255);
     font-family: Impact, Charcoal, sans-serif;
 }
 
@@ -18,9 +18,9 @@ td {
 
 }
 
-#tablero {
+#board {
     border-radius: 9px;
-    background-color: #646996;
+    background-color: #ffffff;
     /*#fce28d; naranja para cambiar*/
 }
 
@@ -34,7 +34,7 @@ td {
     align-content: center;
 }
 
-#mensaje {
+#msgplaceholder {
     font-size: 1.5em;
     color: red;
 }

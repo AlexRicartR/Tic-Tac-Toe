@@ -15,40 +15,49 @@
     <div id="titulo" class="container d-flex align-items-center justify-content-center mt-3 w-100 "><h1 class="display-2">Tic-Tac-Toe</h1></div>
 <div id="cabecera" class="container d-flex align-items-center justify-content-center mt-1">
   
-		<div id="opcion1" class="row mt-5">
-			<button type="button" onclick="jugadores(1)" class="btn btn-warning m-2">1 jugador</button>
-			<button type="button" onclick="jugadores(2)" class="btn btn-warning m-2">2 jugadores</button>
+		<div id="firstscreen" class="row mt-5">
+			<button type="button" onclick="players(1)" class="btn btn-warning m-2">1 jugador</button>
+			<button type="button" onclick="players(2)" class="btn btn-warning m-2">2 players</button>
 		</div>
-		<div id="opcion2" class="row mt-5" hidden="true">
-			<button type="button" onclick="jugando(1)"class="btn btn-warning m-2">Quiero X (empiezo yo)</button>
-			<button type="button" onclick="jugando(2)"class="btn btn-warning m-2">Quiero O (empieza el ordenador)</button>
+		<!-- <div id="midscreen" class="row mt-5">
+			<form action="/action_page.php">
+				<label for="fname">First name:</label>
+				<input type="text" id="fname" name="fname"><br><br>
+				<label for="lname">Last name:</label>
+				<input type="text" id="lname" name="lname"><br><br>
+				<input type="submit" value="Submit">
+			  </form>		
+		</div> -->
+		<div id="secondscreen" class="row mt-5" hidden="true">
+			<button type="button" onclick="playing(1)"class="btn btn-warning m-2">Quiero X (empiezo yo)</button>
+			<button type="button" onclick="playing(2)"class="btn btn-warning m-2">Quiero O (empieza el ordenador)</button>
 		</div>
  </div>
   <div class="container d-flex align-items-center justify-content-center mt-5">
 
-	<div id="tablero" hidden="true">
+	<div id="board" hidden="true">
 		<table>
 			<tr>
-				<td id="celda0" onclick="fcelda(0)"></td>
-				<td id="celda1" onclick="fcelda(1)"></td>
-				<td id="celda2" onclick="fcelda(2)"></td>
+				<td id="gamecell0" onclick="cellglobal(0)"></td>
+				<td id="gamecell1" onclick="cellglobal(1)"></td>
+				<td id="gamecell2" onclick="cellglobal(2)"></td>
 			</tr>
 			<tr>
-				<td id="celda3" onclick="fcelda(3)"></td>
-				<td id="celda4" onclick="fcelda(4)"></td>
-				<td id="celda5" onclick="fcelda(5)"></td>
+				<td id="gamecell3" onclick="cellglobal(3)"></td>
+				<td id="gamecell4" onclick="cellglobal(4)"></td>
+				<td id="gamecell5" onclick="cellglobal(5)"></td>
 			</tr>
 			<tr>
-				<td id="celda6" onclick="fcelda(6)"></td>
-				<td id="celda7" onclick="fcelda(7)"></td>
-				<td id="celda8" onclick="fcelda(8)"></td>
+				<td id="gamecell6" onclick="cellglobal(6)"></td>
+				<td id="gamecell7" onclick="cellglobal(7)"></td>
+				<td id="gamecell8" onclick="cellglobal(8)"></td>
 			</tr>
 		</table>
 	</div>
 </div>
 <div class="container d-flex flex-column-reverse align-items-center justify-content-center mb-5 mt-2">
 	<div id="final"></div>
-  <div id="mensaje" hidden="true">Haz tu primer movimiento</div>
+  <div id="msgplaceholder" hidden="true">Haz tu primer movimiento</div>
 </div>
 <script src="./js/main.js"></script>
 </body>
