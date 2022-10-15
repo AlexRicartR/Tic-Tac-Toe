@@ -226,7 +226,8 @@ function jugadaganadora(num){
 
 		 cellglobal(b+ceroa*3);
 		 return true;
-		}		
+		}
+		
 	}
 	trio[0]=structure[0];
 	trio[1]=structure[4];

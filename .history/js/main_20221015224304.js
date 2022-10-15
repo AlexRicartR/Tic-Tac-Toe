@@ -58,6 +58,7 @@ function beginGame(){
 			if (final()==9){
 				cellglobal(8);
 			}else{
+				
 				if (!jugadaganadora(1)){
 					if(!jugadaganadora(2)){
 						if (esigual(structure,[0,2,0,0,0,0,0,0,1])||esigual(structure,[0,0,0,2,0,0,0,0,1])||esigual(structure,[0,0,0,0,0,2,0,0,1]))cellglobal(6);
@@ -158,7 +159,7 @@ function cellglobal(tcell){
 	manageTextContent(tcell);
 	
 	if (structure[tcell] === 0) {
-		if (ticplayer === 1) {
+		if (ticplayer == 1) {
 			structure[tcell] = 1;
 			ticplayer = 2;
 		}
@@ -192,7 +193,7 @@ function cellglobal(tcell){
 		question();
 		break;
 		default:
-		if (numberOfPlayers==1&&ticplayer!=choice){beginGame();}
+		if (numberOfPlayers==1&&ticplayer!=choice){jugar();}
 	}
 	
 }
@@ -211,6 +212,7 @@ function jugadaganadora(num){
 		let ultima=trio.lastIndexOf(num);
 		let cero=trio.indexOf(0);
 		if (primera!=ultima&& cero!= -1){
+
 		 cellglobal(a+cero);
 		 return true;
 		}
@@ -221,12 +223,13 @@ function jugadaganadora(num){
 		trio[2]=structure[b+6];
 		let primeraa=trio.indexOf(num);
 		let ultimaa=trio.lastIndexOf(num);
-		let ceroa=trio.indexOf(0); 
+		let ceroa=trio.indexOf(0);
 		if (primeraa!=ultimaa&& ceroa!= -1){
 
 		 cellglobal(b+ceroa*3);
 		 return true;
-		}		
+		}
+		
 	}
 	trio[0]=structure[0];
 	trio[1]=structure[4];

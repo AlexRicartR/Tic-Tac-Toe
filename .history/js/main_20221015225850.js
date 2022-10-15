@@ -211,6 +211,7 @@ function jugadaganadora(num){
 		let ultima=trio.lastIndexOf(num);
 		let cero=trio.indexOf(0);
 		if (primera!=ultima&& cero!= -1){
+
 		 cellglobal(a+cero);
 		 return true;
 		}
@@ -226,7 +227,8 @@ function jugadaganadora(num){
 
 		 cellglobal(b+ceroa*3);
 		 return true;
-		}		
+		}
+		
 	}
 	trio[0]=structure[0];
 	trio[1]=structure[4];

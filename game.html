@@ -15,27 +15,31 @@
     <div id="titulo" class="container d-flex align-items-center justify-content-center mt-3 w-100 "><h1 class="display-2">Tic-Tac-Toe</h1></div>
 <div id="cabecera" class="container d-flex align-items-center justify-content-center mt-1">
   
-		<div id="firstscreen" class="row mt-5">
-			<button type="button" onclick="players(1)" class="btn btn-warning m-2">1 jugador</button>
-			<button type="button" onclick="players(2)" class="btn btn-warning m-2">2 players</button>
+		<div id="chooseNumberPlayersScreen" class="row mt-5">
+			<button type="button" onclick="chooseNumberOfPlayers(1)" class="btn btn-warning m-2">1 jugador</button>
+			<button type="button" onclick="chooseNumberOfPlayers(2)" class="btn btn-warning m-2">2 players</button>
 		</div>
-		<!-- <div id="midscreen" class="row mt-5">
-			<form action="/action_page.php">
-				<label for="fname">First name:</label>
-				<input type="text" id="fname" name="fname"><br><br>
-				<label for="lname">Last name:</label>
-				<input type="text" id="lname" name="lname"><br><br>
-				<input type="submit" value="Submit">
+		<div id="writePlayersNames" class="row mt-5" hidden="true">
+			<form>
+				<div id="player1askname" hidden="true">
+					<label for="player1name">Player 1 name:</label>
+					<input type="text" id="player1name" name="player1name"><br><br>
+				</div>
+				<div id="player2askname" hidden="true">
+					<label for="player2name">Player 2 name:</label>
+					<input type="text" id="player2name" name="player2name"><br><br>
+				</div>
+				<input type="button" value="Submit" onclick="saveNames(player1name, player2name)">
 			  </form>		
-		</div> -->
-		<div id="secondscreen" class="row mt-5" hidden="true">
-			<button type="button" onclick="playing(1)"class="btn btn-warning m-2">Quiero X (empiezo yo)</button>
-			<button type="button" onclick="playing(2)"class="btn btn-warning m-2">Quiero O (empieza el ordenador)</button>
+		</div>
+		<div id="whoBeginsScreen" class="row mt-5" hidden="true">
+			<button type="button" onclick="whoStartsSelection(1)"class="btn btn-warning m-2">Quiero X (empiezo yo)</button>
+			<button type="button" onclick="whoStartsSelection(2)"class="btn btn-warning m-2">Quiero O (empieza el ordenador)</button>
 		</div>
  </div>
   <div class="container d-flex align-items-center justify-content-center mt-5">
 
-	<div id="board" hidden="true">
+	<div id="boardScreen" hidden="true">
 		<table>
 			<tr>
 				<td id="gamecell0" onclick="cellglobal(0)"></td>
@@ -53,12 +57,13 @@
 				<td id="gamecell8" onclick="cellglobal(8)"></td>
 			</tr>
 		</table>
+		<div class="container d-flex flex-column-reverse align-items-center justify-content-center mb-5 mt-2">
+			<div id="final"></div>	
+			  <div id="msgplaceholder" hidden="true">Haz tu primer movimiento</div>
+		</div>
 	</div>
 </div>
-<div class="container d-flex flex-column-reverse align-items-center justify-content-center mb-5 mt-2">
-	<div id="final"></div>
-  <div id="msgplaceholder" hidden="true">Haz tu primer movimiento</div>
-</div>
+
 <script src="./js/main.js"></script>
 </body>
 </html>
