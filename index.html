@@ -1,35 +1,76 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <title>Tic-Tac-Toe</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1 maximum-scale=1.0 user-scalable=no">
-  <link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Permanent+Marker" rel="stylesheet">
-  <link rel="stylesheet" href="./css/home.css" type="text/css"/>
-  
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P|Permanent+Marker" rel="stylesheet">
+	<link rel="stylesheet" href="./css/styles.css" type="text/css"/>
+    <title>Tic-Tac-Toe | An Alex Ricart Game</title>
 </head>
-
 <body>
-  <section class="splash-screen load">
-    <div class="title">
-      <h1 class="title-top"><span class="big">T</span>ic-Tac</h1>
-      <h1 class="title-bottom"><span class="big">T</span>oe<span class="big"></span></h1>
-    </div>
+    <div id="titulo" class="container d-flex align-items-center justify-content-center mt-3 w-100 "><h1 class="display-2">Tic-Tac-Toe</h1></div>
+<div id="cabecera" class="container d-flex align-items-center justify-content-center mt-1">
+  
+		<div id="chooseNumberPlayersScreen" class="row mt-5">
+			<button type="button" onclick="chooseNumberOfPlayers(1)" class="button1">Human vs Computer</button>
+			<button type="button" onclick="chooseNumberOfPlayers(2)" class="button1">Human vs Human</button>
+		</div>
+		<div id="writePlayersNames" class="row mt-5" hidden="true">
+			<form>
+				<div id="player1askname" hidden="true">
+					<label for="player1name">Player 1 name:</label>
+					<input type="text" id="player1name" name="player1name"><br><br>
+				</div>
+				<div id="player2askname" hidden="true">
+					<label for="player2name">Player 2 name:</label>
+					<input type="text" id="player2name" name="player2name"><br><br>
+				</div>
+				<input type="button" value="Submit" onclick="saveNames(player1name, player2name)">
+			  </form>		
+		</div>
+		<div id="whoBeginsScreen" class="row mt-5" hidden="true">
+			<div id="whoFirstMove">Who should make the first move?</div> 
+			<button type="button" onclick="whoStartsSelection(1)"class="button1">Human</button>
+			<button type="button" onclick="whoStartsSelection(2)"class="button1">Computer</button>
+		</div>
+ </div>
+  <div class="container d-flex align-items-center justify-content-center mt-5">
 
-    <div class="buttons grey-with-red">
-      <a href="./game.html" class="purple-with-blue">Push start button</a>
-      <a>One Player</a>
-      <a>or</a>
-      <a>Player 1 vs Player 2</a>
-    </div>
+	<div id="boardScreen" hidden="true">
+		<table>
+			<tr>
+				<td id="gamecell0" onclick="cellglobal(0)"></td>
+				<td id="gamecell1" onclick="cellglobal(1)"></td>
+				<td id="gamecell2" onclick="cellglobal(2)"></td>
+			</tr>
+			<tr>
+				<td id="gamecell3" onclick="cellglobal(3)"></td>
+				<td id="gamecell4" onclick="cellglobal(4)"></td>
+				<td id="gamecell5" onclick="cellglobal(5)"></td>
+			</tr>
+			<tr>
+				<td id="gamecell6" onclick="cellglobal(6)"></td>
+				<td id="gamecell7" onclick="cellglobal(7)"></td>
+				<td id="gamecell8" onclick="cellglobal(8)"></td>
+			</tr>
+		</table>
+		<div class="container d-flex flex-column-reverse align-items-center justify-content-center mb-5 mt-2">
+			<div id="final"></div>	
+			  
+		</div>
+	</div>
+</div>
+<div id="msgplaceholder" hidden="true">Haz tu primer movimiento</div>
+<div id="sponsored">
+	<div>This project has been sponsored with &#128151 by <img id="monsterlogo" src="./img/monster.png" alt=""></div>
+	
+</div>
 
-    <div class="bottom">
-        <span class="yellow-with-darkyellow"> SEGA ©</span></a>
-      <div class="credit grey-with-red">Credit <span class="yellow-with-darkyellow">1</span></div>
-    </div>
-  </section>
-
+<script src="./js/main.js"></script>
 </body>
-
 </html>

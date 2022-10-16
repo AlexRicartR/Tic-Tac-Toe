@@ -15,7 +15,6 @@ function resetgame() {
 	document.getElementById("player1askname").setAttribute("hidden", "hidden");
 	document.getElementById("player2askname").setAttribute("hidden", "hidden");
 	document.getElementById("whoBeginsScreen").setAttribute("hidden", "hidden");
-	//document.getElementById("question").setAttribute("hidden", "hidden");
 	document.getElementById("msgplaceholder").setAttribute("hidden", "hidden");
 	document.getElementById("msgplaceholder").textContent = "Make your first move";
 	ticplayer = 1;
@@ -52,24 +51,35 @@ function whoStartsSelection(turn) {
 	beginGame();
 }
 
+/*Here it checks which positions are occupied to perform the next movement by the machine. 
+Injects the value you specify and "cellglobal" inserts the value by the machine. */
+
 function beginGame(){
-	if (choice==2){// casos en los que empieza el ordenador
+	if (choice==2){
 		if (ticplayer!=choice){
 			if (final()==9){
 				cellglobal(8);
 			}else{
 				if (!jugadaganadora(1)){
 					if(!jugadaganadora(2)){
-						if (esigual(structure,[0,2,0,0,0,0,0,0,1])||esigual(structure,[0,0,0,2,0,0,0,0,1])||esigual(structure,[0,0,0,0,0,2,0,0,1]))cellglobal(6);
-						else if (esigual(structure,[0,0,0,0,0,0,0,2,1])) cellglobal(2);
-						else if (esigual(structure,[2,0,0,0,0,0,0,0,1])||esigual(structure,[0,0,2,0,0,0,0,0,1]))cellglobal(6);
-						else if (esigual(structure,[0,0,0,0,0,0,2,0,1])) cellglobal(2);
+						if (esigual(structure,[0,2,0,0,0,0,0,0,1])||esigual(structure,[0,0,0,2,0,0,0,0,1])||esigual(structure,[0,0,0,0,0,2,0,0,1]))
+							cellglobal(6);
+						else if (esigual(structure,[0,0,0,0,0,0,0,2,1])) 
+							cellglobal(2);
+						else if (esigual(structure,[2,0,0,0,0,0,0,0,1])||esigual(structure,[0,0,2,0,0,0,0,0,1]))
+							cellglobal(6);
+						else if (esigual(structure,[0,0,0,0,0,0,2,0,1])) 
+							cellglobal(2);
 						else if (structure[4]==0){
-							if (structure[8]==1 && (structure[6]==1||structure[2]==1)) cellglobal(4);
+							if (structure[8]==1 && (structure[6]==1||structure[2]==1)) 
+							cellglobal(4);
 						}
-						else if (esigual(structure,[0,0,0,0,2,0,0,0,1]))cellglobal(0);
-						else if (esigual(structure,[1,0,2,0,2,0,0,0,1]))cellglobal(6);
-						else if (esigual(structure,[1,0,0,0,2,0,2,0,1]))cellglobal(2);
+						else if (esigual(structure,[0,0,0,0,2,0,0,0,1]))
+							cellglobal(0);
+						else if (esigual(structure,[1,0,2,0,2,0,0,0,1]))
+							cellglobal(6);
+						else if (esigual(structure,[1,0,0,0,2,0,2,0,1]))
+							cellglobal(2);
 						else{
 							cellglobal(structure.indexOf(0));
 						}
@@ -77,16 +87,24 @@ function beginGame(){
 				}
 			}
 		}
+	
+	//// It performs the same operation as the above when the computer is not the player that makes the first move.
+
 	}else if (ticplayer==2){
 		if (!jugadaganadora(2)){
 					if(!jugadaganadora(1)){
-						if (structure[4]==0)cellglobal(4);
-						else if (esigual(structure,[0,0,0,0,1,0,0,0,0]))cellglobal(8);
-						else if((structure[0]==1||structure[2]==1||structure[6]==1||structure[8]==1) && structure[1]==0)cellglobal(1);
-						else if((structure[0]==1||structure[2]==1||structure[6]==1||structure[8]==1) && structure[3]==0)cellglobal(3);
-						else if (esigual(structure,[0,1,0,0,2,0,0,1,0])||esigual(structure,[0,0,0,1,2,1,0,0,0]))cellglobal(2);
+						if (structure[4]==0)
+							cellglobal(4);
+						else if (esigual(structure,[0,0,0,0,1,0,0,0,0]))
+							cellglobal(8);
+						else if((structure[0]==1||structure[2]==1||structure[6]==1||structure[8]==1) && structure[1]==0)
+							cellglobal(1);
+						else if((structure[0]==1||structure[2]==1||structure[6]==1||structure[8]==1) && structure[3]==0)
+							cellglobal(3);
+						else if (esigual(structure,[0,1,0,0,2,0,0,1,0])||esigual(structure,[0,0,0,1,2,1,0,0,0]))
+							cellglobal(2);
 						else{
-						cellglobal(structure.indexOf(0));
+							cellglobal(structure.indexOf(0));
 						}
 					}
 					
@@ -94,7 +112,7 @@ function beginGame(){
 	}
 }
 
-////////////////////////////////////////Revisar logica
+/// The below "for" loop checks if the field is empty. The second and third "for" loop checks if there is space to fill blank field with an specified combination. 
 
 function final() {
 	let squares = 0;
@@ -135,10 +153,10 @@ function drawxo() {
 function manageTextContent(tcell){
 	if (numberOfPlayers === 1) {
 		if (choice == ticplayer) {
-			document.getElementById("msgplaceholder").textContent = "Juega Ordenador";
+			document.getElementById("msgplaceholder").textContent = "Computer turn";
 		}
 		else {
-			document.getElementById("msgplaceholder").textContent = "Juegas tú";
+			document.getElementById("msgplaceholder").textContent = (player1name + ", you play");
 		}
 	}
 	else {
@@ -178,17 +196,17 @@ function cellglobal(tcell){
 		case 1:
 		console.log(numberOfPlayers, choice);
 		if (numberOfPlayers==1){
-			if (choice==1) document.getElementById("msgplaceholder").textContent="Has ganado!!!";
-			else document.getElementById("msgplaceholder").textContent="Ordenador gana";
+			if (choice==1) document.getElementById("msgplaceholder").textContent="You win!!!";
+			else document.getElementById("msgplaceholder").textContent="Game over";
 		}else document.getElementById("msgplaceholder").textContent=(player2name +" wins!");
 		question();
 		break;
 		case 2:
 		//console.log(numberOfPlayers, choice);
 		if (numberOfPlayers==1){
-			if (choice==2) document.getElementById("msgplaceholder").textContent="Has ganado!!!";
-			else document.getElementById("msgplaceholder").textContent="Ordenador gana";;
-		}else document.getElementById("msgplaceholder").textContent="Gana ticplayer 2";
+			if (choice==2) document.getElementById("msgplaceholder").textContent=(player1name +", you win!!!");
+			else document.getElementById("msgplaceholder").textContent="Game over";;
+		}else document.getElementById("msgplaceholder").textContent=(player2name +", you win");
 		question();
 		break;
 		default:
@@ -259,7 +277,7 @@ function esigual(a1, a2){
 // This function ask the user if he wants to play again and cleans the boardScreen through the "resetgame" function
 
 function question(){
-	document.getElementById("final").innerHTML = '<button id="question" type="button" onclick="resetgame()" class="btn btn-warning">Play again</button>';
+	document.getElementById("final").innerHTML = '<button id="question" type="button" onclick="resetgame()" class="button1">Play again</button>';
 }
 
 
