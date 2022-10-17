@@ -19,7 +19,8 @@ In this version, it also was included a single player option that allow the user
 
 For this project the following fonts were used:
 
-- [PressStart2P]: https://github.com/codeman38/PressStart2P
+PressStart2P 
+https://github.com/codeman38/PressStart2P
 
   
 
