@@ -8,7 +8,7 @@ In this version, it also was included a single player option that allow the user
 
 
 
-![](C:\Users\alexr\Desktop\chrome_lTt5b393I9.png)
+![chrome_lTt5b393I9](https://user-images.githubusercontent.com/114058505/196208952-7cdde879-617e-4cb5-a248-f9b6ab501490.png)
 
 ![](C:\Users\alexr\Desktop\chrome_ql3Y69btf6.png)
 
