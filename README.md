@@ -10,10 +10,9 @@ In this version, it also was included a single player option that allow the user
 
 ![chrome_lTt5b393I9](https://user-images.githubusercontent.com/114058505/196208952-7cdde879-617e-4cb5-a248-f9b6ab501490.png)
 
-![](C:\Users\alexr\Desktop\chrome_ql3Y69btf6.png)
+![chrome_ql3Y69btf6](https://user-images.githubusercontent.com/114058505/196209110-501ac704-7c4d-47a9-9368-7fc9b53200dc.png)
 
-![](C:\Users\alexr\Desktop\chrome_cyuiZRrk4U.png)
-
+![chrome_cyuiZRrk4U](https://user-images.githubusercontent.com/114058505/196209146-5ecfade6-52a6-4b14-88e4-c7f75d74e95a.png)
 
 
 ## Fonts
