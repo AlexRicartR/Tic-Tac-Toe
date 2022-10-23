@@ -30,29 +30,14 @@ function chooseNumberOfPlayers(num) {
 	showWritePlayersNames();	
 }
 
-// function checkNames () {
-// if (player1name === "")
-// 	alert("Error: Input is empty!");
-// 	name1.inputfield.focus();
-// 	return false;
-// else ()
-// saveNames 
-// }
-
-// if (player2name === "") {
-// 	alert("Error: Input is empty!");
-// 	name2.inputfield.focus();
-// 	return false;
-// }
-
 let a = document.getElementById("player2askname")
-/// Revisar referenciar atributo hidden
+const secondinput = document.getElementById("player2askname");
+
 function saveNames(name1, name2){
 	console.log(a)
 	player1name = name1.value;
-	console.log(name1)
-	console.log(name2)
-	if (name1.value.length > 0 && || name2.value.length > 0) {
+
+	if (name1.value.length > 0 && (secondinput.hidden || name2.value.length > 0)) {
 		document.getElementById("writePlayersNames").setAttribute("hidden", "hidden");
 		document.getElementById("player1askname").setAttribute("hidden", "hidden");
 		if (numberOfPlayers === 1) {
@@ -70,6 +55,7 @@ function saveNames(name1, name2){
 
 	
 }
+
 
 function whoStartsSelection(turn) {
 	choice = turn;
