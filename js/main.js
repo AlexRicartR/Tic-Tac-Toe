@@ -145,14 +145,18 @@ function final() {
 
 // The below function sets up when it should draw an X or either an O based on a "< 9" logic as set forth in the for conditional.
 
-function drawxo() {
+function drawxo(x) {
 
 	for (let i = 0; i < 9; i++) {
 		if (structure[i] == 0) {
-			document.getElementById("gamecell" + i).textContent = "";
+			document.getElementById("gamecell" + i).textContent = " ";
 		} else if (structure[i] == 1) {
+			// const delay = () => {
 			document.getElementById("gamecell" + i).textContent = "X";
 			document.getElementById("gamecell" + i).style.color = "yellow";
+		// }			
+		// setTimeout(delay, 1000) //// Check to implement delay 
+
 		} else {
 			document.getElementById("gamecell" + i).textContent = "O";
 			document.getElementById("gamecell" + i).style.color = "red";
@@ -200,13 +204,14 @@ function cellglobal(tcell){
 	
 	//console.log (structure);
 	drawxo();  
+	// console.log(final())  /// This block set forth which message should be printed. 
 	switch (final()){
 		case 0:
 		document.getElementById("msgplaceholder").textContent="Tie, try playing again!";
 		question();
 		break;
 		case 1:
-		console.log(numberOfPlayers, choice);
+		// console.log(numberOfPlayers, choice);
 		if (numberOfPlayers==1){
 			if (choice==1) document.getElementById("msgplaceholder").textContent="You win!!!";
 			else document.getElementById("msgplaceholder").textContent="Game over";
@@ -226,7 +231,6 @@ function cellglobal(tcell){
 	}
 	
 }
-
 
 
 function jugadaganadora(num){
