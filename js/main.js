@@ -1,13 +1,16 @@
 let structure = [0, 0, 0, 0, 0, 0, 0, 0, 0];
 let ticplayer = 1;
 let numberOfPlayers = 0;
-let choice = 0;
+let whichPlayerBegins = 0;
+let globalTurnPlayer = 0;
 let corners = [0, 2, 6, 8];
 let player1name;
 let player2name;
+let movesDoneByPlayer1 = [];
+let movesDoneByPlayer2 = [];
+let movesDoneByComputer = [];
 
-let pieces = 6;
-let readyPutPiece = false
+let thisPositionAlreadyHasAPiece = false
 let readyPutPieceComputer = false
 
 
@@ -23,7 +26,7 @@ function resetgame() {
     document.getElementById("msgplaceholder").textContent = "Make your first move";
     ticplayer = 1;
     numberOfPlayers = 0;
-    choice = 0;
+    globalTurnPlayer = 0;
     structure = [0, 0, 0, 0, 0, 0, 0, 0, 0];
     drawxo();
     document.getElementById("boardScreen").setAttribute("hidden", "hidden");
@@ -58,116 +61,147 @@ function saveNames(name1, name2) {
 
 }
 
-function whoStartsSelection(turn) {
-    choice = turn;
-    // human choice 1  and computer 2
+function whoStartsSelection(playerWhoBegins) {
+    whichPlayerBegins = playerWhoBegins;
+    globalTurnPlayer = playerWhoBegins;
 
     showBoardScreen();
-    beginGame();
+    makeMove();
+}
+
+function nextTurn(){
+    globalTurnPlayer = globalTurnPlayer === 1 ? 2 : 1; 
+    makeMove();
 }
 
 /*Here it checks which positions are occupied to perform the next movement by the machine. 
 Injects the value you specify and "cellglobal" inserts the value by the machine. */
 
-function beginGame() {
-    console.log("entro")
-
-    if (choice == 2) {
-        if (ticplayer != choice) {
-            if (final() == 9) {
-                cellglobal(8);
-            } else {
-                if (!jugadaganadora(1)) {
-                    if (!jugadaganadora(2)) {
-                        if (esigual(structure, [0, 2, 0, 0, 0, 0, 0, 0, 1]) || esigual(structure, [0, 0, 0, 2, 0, 0, 0, 0, 1]) || esigual(structure, [0, 0, 0, 0, 0, 2, 0, 0, 1]))
-                            cellglobal(6);
-                        else if (esigual(structure, [0, 0, 0, 0, 0, 0, 0, 2, 1]))
-                            cellglobal(2);
-                        else if (esigual(structure, [2, 0, 0, 0, 0, 0, 0, 0, 1]) || esigual(structure, [0, 0, 2, 0, 0, 0, 0, 0, 1]))
-                            cellglobal(6);
-                        else if (esigual(structure, [0, 0, 0, 0, 0, 0, 2, 0, 1]))
-                            cellglobal(2);
-                        else if (structure[4] == 0) {
-                            if (structure[8] == 1 && (structure[6] == 1 || structure[2] == 1))
-                                cellglobal(4);
-                        }
-                        else if (esigual(structure, [0, 0, 0, 0, 2, 0, 0, 0, 1]))
-                            cellglobal(0);
-                        else if (esigual(structure, [1, 0, 2, 0, 2, 0, 0, 0, 1]))
-                            cellglobal(6);
-                        else if (esigual(structure, [1, 0, 0, 0, 2, 0, 2, 0, 1]))
-                            cellglobal(2);
-                        else {
-                            cellglobal(structure.indexOf(0));
-                        }
-                    }
-                }
-            }
+function makeMove() {
+    if(isComputerTurn()){
+        if(movesDoneByComputer.length === 3){
+            structure[movesDoneByComputer[0]] = 0;
+            movesDoneByComputer = movesDoneByComputer.shift();
         }
+        const computerMovePosition = computerRandomizeSelection();
+        setTimeout(()=>{
+            movesDoneByComputer.push(computerMovePosition);
+            structure[computerMovePosition] = 2;
+            manageFinalOrNextTurn(), 1000
+        })
+        drawxo()
+    }
+    else{
+        console.log("Watis for Player move");
+    } 
+    
+}
 
-        //// It performs the same operation as the above when the computer is not the player that makes the first move.
+function playerMakesMove(positionWherePlayerMakesMove){
+    // Aquí nunca entra el ordenador, porque se llama desde la vista
 
-    } else if (ticplayer == 2) {
-        if (!jugadaganadora(2)) {
-            if (!jugadaganadora(1)) {
-                if (structure[4] == 0)
-                    cellglobal(4);
-                else if (esigual(structure, [0, 0, 0, 0, 1, 0, 0, 0, 0]))
-                    cellglobal(8);
-                else if ((structure[0] == 1 || structure[2] == 1 || structure[6] == 1 || structure[8] == 1) && structure[1] == 0)
-                    cellglobal(1);
-                else if ((structure[0] == 1 || structure[2] == 1 || structure[6] == 1 || structure[8] == 1) && structure[3] == 0)
-                    cellglobal(3);
-                else if (esigual(structure, [0, 1, 0, 0, 2, 0, 0, 1, 0]) || esigual(structure, [0, 0, 0, 1, 2, 1, 0, 0, 0]))
-                    cellglobal(2);
-                else {
-                    cellglobal(structure.indexOf(0));
-                }
-            }
-
+    //PLAYER 1
+    if(globalTurnPlayer === 1 /*&& !isComputerTurn()*/){
+        if(movesDoneByPlayer1.length === 3){
+            structure[movesDoneByPlayer1[0]] = 0;
+            movesDoneByPlayer1 = movesDoneByPlayer1.shift();
         }
+        structure[positionWherePlayerMakesMove] = 1;
+        movesDoneByPlayer1.push(positionWherePlayerMakesMove);
+    }
+
+
+    //PLAYER 2
+    if(globalTurnPlayer === 2 /*&& !isComputerTurn()*/){
+        if(movesDoneByPlayer2.length === 3){
+            structure[movesDoneByPlayer2[0]] = 0;
+            movesDoneByPlayer2 = movesDoneByPlayer2.shift();
+        }
+        structure[positionWherePlayerMakesMove] = 2;
+        movesDoneByPlayer2.push(positionWherePlayerMakesMove);
+    }
+    
+    manageFinalOrNextTurn();
+    
+    
+}
+
+function manageFinalOrNextTurn(){
+    drawxo();
+    const finalType = hasEnded();
+    if(finalType.hasEnded === false){
+        nextTurn();
+    }
+    else{
+        manageFinalTexts(finalType);
     }
 }
 
+function manageFinalTexts(finalType){
+    switch (finalType) {
+        case 0:
+            document.getElementById("msgplaceholder").textContent = "Tie, try playing again!";
+            question();
+            break;
+        case 1:
+            // console.log(numberOfPlayers, globalTurnPlayer);
+            if (numberOfPlayers === 1) {
+                if (globalTurnPlayer === 1) document.getElementById("msgplaceholder").textContent = "You win!!!";
+                else document.getElementById("msgplaceholder").textContent = "Game over";
+                document.getElementById("boardScreen").setAttribute("hidden", "hidden");
+            } else document.getElementById("msgplaceholder").textContent = (player2name + " wins!");
+            question();
+            break;
+        case 2:
+            //console.log(numberOfPlayers, globalTurnPlayer);
+            if (numberOfPlayers === 1) {
+                if (globalTurnPlayer === 2) document.getElementById("msgplaceholder").textContent = (player1name + ", you win!!!");
+                else {document.getElementById("msgplaceholder").textContent = "Game over";
+                document.getElementById("boardScreen").setAttribute("hidden", "hidden");
+            }
+            } else document.getElementById("msgplaceholder").textContent = (player2name + ", you win");
+            question();
+            break;
+        default:
+            if (numberOfPlayers === 1 && ticplayer !== globalTurnPlayer) { nextTurn(); }
+    }
+}
+
+
+
 /// The below "for" loop checks if the field is empty. The second and third "for" loop checks if there is space to fill blank field with an specified combination. 
 
-function final() {
+function hasEnded() {
     let squares = 0;
+    /*
     for (let i = 0; i < structure.length; i++) {
         if (structure[i] == 0) squares++;
-    }
+    }*/
     for (let a = 0; a < 8; a += 3) {
         if (structure[a] == structure[a + 1] && structure[a + 1] == structure[a + 2] && structure[a] > 0) return structure[a];
     }
     for (let b = 0; b < 3; b++) {
         if (structure[b] == structure[b + 3] && structure[b + 3] == structure[b + 6] && structure[b] > 0) return structure[b];
     }
-    if (structure[0] == structure[4] && structure[4] == structure[8] && structure[0] > 0) return structure[0];
-    if (structure[2] == structure[4] && structure[4] == structure[6] && structure[2] > 0) return structure[2];
-    if (squares == 9) return 9;
-    if (squares == 0) return 0;
+    if (structure[0] == structure[4] && structure[4] == structure[8] && structure[0] > 0) return {hasEnded:true, whoWins: structure[0]}
+    if (structure[2] == structure[4] && structure[4] == structure[6] && structure[2] > 0) return {hasEnded:true, whoWins: structure[0]}
+    if (squares == 9) return {hasEnded: false, whoWins:null};
 }
 
 // The below function sets up when it should draw an X or either an O based on a "< 9" logic as set forth in the for conditional.
 
 function drawxo() {
-    pieces--;
-
-    if (pieces >= 0) {
-        for (let i = 0; i < 9; i++) {
-            if (structure[i] == 0) {
-                document.getElementById("gamecell" + i).textContent = "";
-            } else if (structure[i] == 1) {
-                // const delay = () => {
-                document.getElementById("gamecell" + i).textContent = "X";
-                document.getElementById("gamecell" + i).style.color = "yellow";
-                // }            
-                // setTimeout(delay, 1000) //// Check to implement delay 
-
-            } else {
-                document.getElementById("gamecell" + i).textContent = "O";
-                document.getElementById("gamecell" + i).style.color = "red";
-            }
+    for (let i = 0; i < 9; i++) {            
+        if (structure[i] === 0) {
+            document.getElementById("gamecell" + i).textContent = "";
+        } 
+        if(structure[i] === 1) {
+            document.getElementById("gamecell" + i).textContent = "X";
+            document.getElementById("gamecell" + i).style.color = "yellow";
+        }
+        if(structure[i] === 2) {
+            document.getElementById("gamecell" + i).textContent = "O";
+            document.getElementById("gamecell" + i).style.color = "red";
         }
     }
 }
@@ -177,7 +211,7 @@ function drawxo() {
 function manageTextContent(tcell) {
 
     if (numberOfPlayers === 1) {
-        if (choice == ticplayer) {
+        if (globalTurnPlayer == ticplayer) {
             document.getElementById("msgplaceholder").textContent = "Computer turn";
         }
         else {
@@ -222,14 +256,13 @@ function putpiececomputer(cell) {
 }
 
 function cellglobal(tcell) {
+    if(true){
 
-    if (readyPutPiece == true) {
         document.getElementById("gamecell" + tcell).textContent = "X";
         document.getElementById("gamecell" + tcell).style.color = "yellow";
-        readyPutPiece = false;
 
-        putpiececomputer(tcell)
-        // choice = 2;
+        //putpiececomputer(tcell)
+        // globalTurnPlayer = 2;
         // beginGame()
     }
 
@@ -249,42 +282,17 @@ function cellglobal(tcell) {
 
         if (pieces < 0 && document.getElementById("gamecell" + tcell).textContent == "X") {
             document.getElementById("gamecell" + tcell).textContent = "";
-            readyPutPiece = true
+            thisPositionAlreadyHasAPiece = true
         }
         else {
             drawxo();
         }
 
-        switch (final()) {
-            case 0:
-                document.getElementById("msgplaceholder").textContent = "Tie, try playing again!";
-                question();
-                break;
-            case 1:
-                // console.log(numberOfPlayers, choice);
-                if (numberOfPlayers == 1) {
-                    if (choice == 1) document.getElementById("msgplaceholder").textContent = "You win!!!";
-                    else document.getElementById("msgplaceholder").textContent = "Game over";
-                    document.getElementById("boardScreen").setAttribute("hidden", "hidden");
-                } else document.getElementById("msgplaceholder").textContent = (player2name + " wins!");
-                question();
-                break;
-            case 2:
-                //console.log(numberOfPlayers, choice);
-                if (numberOfPlayers == 1) {
-                    if (choice == 2) document.getElementById("msgplaceholder").textContent = (player1name + ", you win!!!");
-                    else {document.getElementById("msgplaceholder").textContent = "Game over";
-                    document.getElementById("boardScreen").setAttribute("hidden", "hidden");
-                }
-                } else document.getElementById("msgplaceholder").textContent = (player2name + ", you win");
-                question();
-                break;
-            default:
-                if (numberOfPlayers == 1 && ticplayer != choice) { beginGame(); }
-        }
+        
     }
 }
 
+/*
 function jugadaganadora(num) {
     let finalizado = false;
     let trio = [0, 0, 0];
@@ -331,6 +339,30 @@ function jugadaganadora(num) {
         cellglobal(2 * cerof + 2);
         return true;
     }
+}
+*/
+
+function computerRandomizeSelection(){
+    let randomPosition = Math.floor(Math.random() * (8 - 0 + 1) + 0);
+    while(structure[randomPosition]>0){//alguien ha puesto ficha
+        randomPosition = Math.floor(Math.random() * (8 - 0 + 1) + 0);
+    }   
+    return randomPosition; 
+    
+}
+
+function isComputerTurn(){
+    
+
+    if(numberOfPlayers === 2){
+        return false;
+    }
+
+    let isHuman = ( numberOfPlayers === 1 && globalTurnPlayer === 1);
+    if(isHuman){
+        return false;
+    }
+    return true;
 }
 
 function esigual(a1, a2) {
