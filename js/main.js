@@ -17,7 +17,7 @@ let readyPutPieceComputer = false
 // This function would clean the boardScreen if called.
 
 function resetgame() {
-    document.getElementById("chooseNumberPlayersScreen").removeAttribute("hidden", "khidden");
+    document.getElementById("chooseNumberPlayersScreen").removeAttribute("hidden", "hidden");
     document.getElementById("writePlayersNames").setAttribute("hidden", "hidden");
     document.getElementById("player1askname").setAttribute("hidden", "hidden");
     document.getElementById("player2askname").setAttribute("hidden", "hidden");
@@ -231,29 +231,27 @@ function manageTextContent(tcell) {
     }
 }
 
-function putpiececomputer(cell) {
-    for (i = 0; i < 9; i++) {
-        let piecedontdelete
+// function putpiececomputer(cell) {
+//     for (i = 0; i < 9; i++) {
+//         let piecedontdelete
 
-        if (document.getElementById("gamecell" + i).textContent == "") {
-            console.log("entre if computer")
-            document.getElementById("gamecell" + i).textContent = "O";
-            document.getElementById("gamecell" + i).style.color = "red";
-            piecedontdelete = i;
-            for (i = 0; i < 9; i++) {
-                if (document.getElementById("gamecell" + i).textContent == "O" && i != piecedontdelete) {
-                    document.getElementById("gamecell" + i).textContent = "";
-                    break;
-                }
-            }
-            break;
-        }
-        // document.getElementById("gamecell" + tcell).textContent = "X";
-        // document.getElementById("gamecell" + tcell).style.color = "yellow";
+//         if (document.getElementById("gamecell" + i).textContent == "") {
+//             console.log("entre if computer")
+//             document.getElementById("gamecell" + i).textContent = "O";
+//             document.getElementById("gamecell" + i).style.color = "red";
+//             piecedontdelete = i;
+//             for (i = 0; i < 9; i++) {
+//                 if (document.getElementById("gamecell" + i).textContent == "O" && i != piecedontdelete) {
+//                     document.getElementById("gamecell" + i).textContent = "";
+//                 }
+//             }
+//         }
+//         // document.getElementById("gamecell" + tcell).textContent = "X";
+//         // document.getElementById("gamecell" + tcell).style.color = "yellow";
 
-    }
+//     }
 
-}
+// }
 
 function cellglobal(tcell) {
     if(true){
@@ -288,7 +286,33 @@ function cellglobal(tcell) {
             drawxo();
         }
 
-        
+        switch (final()) {
+            case 0:
+                document.getElementById("msgplaceholder").textContent = "Tie, try playing again!";
+                question();
+                break;
+            case 1:
+                // console.log(numberOfPlayers, choice);
+                if (numberOfPlayers == 1) {
+                    if (choice == 1) document.getElementById("msgplaceholder").textContent = "You win!!!";
+                    else document.getElementById("msgplaceholder").textContent = "Game over";
+                    document.getElementById("boardScreen").setAttribute("hidden", "hidden");
+                } else document.getElementById("msgplaceholder").textContent = (player2name + " wins!");
+                question();
+                break;
+            case 2:
+                //console.log(numberOfPlayers, choice);
+                if (numberOfPlayers == 1) {
+                    if (choice == 2) document.getElementById("msgplaceholder").textContent = (player1name + ", you win!!!");
+                    else {document.getElementById("msgplaceholder").textContent = "Game over";
+                    document.getElementById("boardScreen").setAttribute("hidden", "hidden");
+                }
+                } else document.getElementById("msgplaceholder").textContent = (player2name + ", you win");
+                question();
+                break;
+            default:
+                if (numberOfPlayers == 1 && ticplayer != choice) { beginGame(); }
+        }
     }
 }
 
