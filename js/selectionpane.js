@@ -27,6 +27,6 @@ const savePlayers = () => {
     } else if (NamePlayer1 == "" || NamePlayer2 == "") {
         alert("Jotting down both names is mandatory mate");
     } else {
-        document.getElementById("startGame").href = "/pages/videogame.html";
+        document.getElementById("startGame").href = "../pages/selectionpane.html";
     };
 }
