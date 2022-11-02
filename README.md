@@ -8,11 +8,13 @@ In this version, it also was included a single player option that allow the user
 
 
 
-![chrome_lTt5b393I9](https://user-images.githubusercontent.com/114058505/196208952-7cdde879-617e-4cb5-a248-f9b6ab501490.png)
+![chrome_NZtqJP5Ym8](https://user-images.githubusercontent.com/114058505/199435478-73b21813-bf2a-466b-9f5a-cb0aba4f9ce5.png)
 
-![chrome_ql3Y69btf6](https://user-images.githubusercontent.com/114058505/196209110-501ac704-7c4d-47a9-9368-7fc9b53200dc.png)
+![chrome_RMOawkj435](https://user-images.githubusercontent.com/114058505/199435530-7a2ddade-a6a6-4e59-a4b2-b60127bff4ff.png)
 
-![chrome_cyuiZRrk4U](https://user-images.githubusercontent.com/114058505/196209146-5ecfade6-52a6-4b14-88e4-c7f75d74e95a.png)
+![chrome_C19px4cDUC](https://user-images.githubusercontent.com/114058505/199435567-963ae521-f92e-496d-9e83-9d67000aa310.png)
+
+![chrome_lD4LGojnWN](https://user-images.githubusercontent.com/114058505/199435598-22589adf-50bb-4ac0-b77e-3eec9afce1d8.png)
 
 
 ## Fonts
